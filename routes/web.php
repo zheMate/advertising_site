@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Main\IndexController as MainIndexController;
+use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,13 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace' => 'Main'], function() {
+    Route::get('/', [IndexController::class, '__invoke']);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::group(['namespace' => 'Dashboard', 'prefix' => 'dashboard', 'middleware' => ['auth','verified']], function() {
+    Route::group(['namespace' => 'Main'], function () {
+        Route::get('/', [MainIndexController::class, '__invoke'])->name('dashboard.mainindex');
+    });
+});
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
