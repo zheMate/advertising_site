@@ -11,4 +11,8 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = false;
+
+    public function promos() {
+        return $this->hasMany(Promo::class);
+    }
 }

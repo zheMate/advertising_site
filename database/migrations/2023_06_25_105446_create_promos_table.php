@@ -19,7 +19,9 @@ return new class extends Migration
             $table->decimal('price');
             $table->text('contacts');
             $table->enum('status', ['Активна', 'Неактивна'])->default('Активна');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('category_id', 'promo_category_idx');
             $table->foreign('category_id', 'promo_category_fk')->on('categories')->references('id');
