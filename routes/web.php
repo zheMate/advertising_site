@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Main'], function () {
-    Route::get('/', [IndexController::class, '__invoke']);
+    Route::get('/', [IndexController::class, '__invoke'])->name('main.index');
     Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
         Route::get('/', [IndexController::class, '__invoke'])->name('category.index');
         Route::group(['namespace' => 'Promo', 'prefix' => '{category}/promos'], function() {
@@ -45,6 +45,10 @@ Route::group(['namespace' => 'Dashboard', 'prefix' => 'dashboard', 'middleware' 
         Route::get('/',  [DashPromoIndexController::class, '__invoke'])->name('dashboard.promo.index');
         Route::get('/create',  [DashPromoCreateController::class, '__invoke'])->name('dashboard.promo.create');
         Route::post('/',  [DashPromoStoreController::class, '__invoke'])->name('dashboard.promo.store');
+        //todo: пользователь может посмотреть инфу по чужому промо в дашборде
+        /*
+         * Думаю для этого должна быть детальная страница товара, а не просмотр по дашборду
+         */
         Route::get('/{promo}',  [DashPromoShowController::class, '__invoke'])->name('dashboard.promo.show');
         Route::get('/{promo}/edit', [DashPromoEditController::class, '__invoke'])->name('dashboard.promo.edit')->middleware('can:update,promo');
         Route::patch('/{promo}',  [DashPromoUpdateController::class, '__invoke'])->name('dashboard.promo.update')->middleware('can:update,promo');;
@@ -61,3 +65,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+//todo: коммиты должны подчеркивать ветку на которой ты работаешь и что ты сделал
+/*
+ * Пример: поправил добавил имя для роута /
+ * Коммит: main| add name for main route
+ */

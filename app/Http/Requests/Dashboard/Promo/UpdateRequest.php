@@ -22,6 +22,12 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            //todo:учитывай в валидации все аспекты своей системы, иначе будет 500 ошибка
+            /*
+             * Если на боевом проекте выполнив задачу по создании сущности выйдет 500 ошибка
+             * Заказчик будет не в восторге от этого
+             * Мысли шире
+             */
             'title' => 'required|string',
             'description' => 'required|string',
             'contacts' => 'required|string',

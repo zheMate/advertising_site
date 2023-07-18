@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //todo: Название таблицы с товарами promos, что переводится как промо, не совсем хороший нейминг
         Schema::create('promos', function (Blueprint $table) {
             $table->id();
             $table->string('title');

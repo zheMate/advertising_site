@@ -22,6 +22,11 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            //todo: не учел максимальное количество знаков или максимальное значение
+            /*
+             * Если я укажу длинное название при создании/редактировании товара
+             * то у тебя вылетит 500 ошибка, а должна пройти валидация
+             */
             'title' => 'required|string',
             'description' => 'required|string',
             'contacts' => 'required|string',

@@ -21,4 +21,5 @@ class DeleteAndUpdatePromoPolicy
     public function destroy(User $user, Promo $promo) {
         return $this->update($user, $promo);
     }
+    //todo: check in dashboard
 }
